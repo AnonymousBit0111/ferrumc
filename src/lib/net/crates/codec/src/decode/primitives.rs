@@ -101,3 +101,16 @@ where
         Ok(map)
     }
 }
+
+impl<T, const N: usize> NetDecode for [T; N]
+where
+    T: NetDecode + Default + Clone + std::fmt::Debug,
+{
+    fn decode<R: Read>(reader: &mut R, opts: &NetDecodeOpts) -> NetDecodeResult<Self> {
+        let mut arr = vec![T::default(); N];
+        for elem in arr.iter_mut().take(N) {
+            *elem = T::decode(reader, opts)?;
+        }
+        Ok(arr.try_into().unwrap())
+    }
+}

@@ -14,6 +14,7 @@ async fn handle_player_move(
     let conn_id = event.conn_id;
 
     let mut position = conn_id.get_mut::<Position>(state)?;
+    // TODO check if the move is valid
     
     *position = Position::new(
         new_position.x,
