@@ -601,7 +601,7 @@ mod general {
 
 /// tf, whats the point of this?
 /// the data will probably die?? idk? possibly not? ?? lmao
-impl<'a> NetEncode for NbtTape<'a> {
+impl NetEncode for NbtTape<'_> {
     fn encode<W: Write>(&self, writer: &mut W, _opts: &NetEncodeOpts) -> NetEncodeResult<()> {
         let data = self.data;
         writer.write_all(data)?;
@@ -634,7 +634,7 @@ impl NbtTapeElement<'_> {
                 writer.write_all(&[self.nbt_id()])?;
                 name.serialize(writer, &NBTSerializeOptions::None);
             }
-            NBTSerializeOptions::Network => {
+            NBTSerializeOptions::Network | NBTSerializeOptions::Flatten => {
                 writer.write_all(&[self.nbt_id()])?;
             }
         }
