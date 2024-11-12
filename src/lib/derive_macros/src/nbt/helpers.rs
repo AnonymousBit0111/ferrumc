@@ -153,17 +153,12 @@ impl NbtFieldAttribute {
                             case: case
                         });
                     }
-
                     _ => {}
-
-
                 }
 
                 Ok(())
             })
-
             .unwrap_or_else(|_| println!("[WARN] Failed to parse nested meta parsing input attributes"));
-
         }
 
         attributes
