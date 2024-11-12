@@ -88,7 +88,7 @@ ferrumc-general-purpose = { path = "src/lib/utils/general_purpose" }
 ferrumc-macros = { path = "src/lib/derive_macros" }
 ferrumc-world = { path = "src/lib/world" }
 ferrumc-nbt = { path = "src/lib/adapters/nbt" }
-ferrumc-mca = { path = "src/lib/adapters/mca" }
+ferrumc-anvil = { path = "src/lib/adapters/anvil" }
 ferrumc-tests = { path = "src/tests" }
 
 
@@ -116,12 +116,15 @@ thiserror = "1.0.63"
 # Cryptography
 rsa = "0.9.6"
 rand = "0.9.0-alpha.2"
+fnv = "1.0.7"
 
 # Encoding/Serialization
 serde = { version = "1.0.210", features = ["derive"] }
 serde_json = "1.0.128"
 serde_derive = "1.0.210"
 base64 = "0.22.1"
+bitcode = "0.6.3"
+bitcode_derive = "0.6.3"
 
 # Data types
 hashbrown = "0.15.0"
@@ -137,6 +140,7 @@ proc-macro2 = "1.0.86"
 proc-macro-crate = "3.2.0"
 paste = "1.0.15"
 maplit = "1.0.2"
+macro_rules_attribute = "0.2.0"
 
 # Magic ("life-before-main" initialization, __attribute__((constructor)))
 ctor = "0.2.8"
@@ -148,6 +152,15 @@ zstd = { version = "0.13.2" }
 brotli = "7.0.0"
 lzzzz = "1.1.0"
 yazi = "0.2.0"
+bzip2 = "0.4.1"
+
+# CLI
+clap = "4.5.20"
+indicatif = "0.17.8"
+colored = "2.1.0"
+
+# Misc
+deepsize = "0.2.0"
 
 # I/O
 tempfile = "3.12.0"
@@ -155,3 +168,13 @@ memmap2 = "0.9.5"
 
 # Benchmarking
 criterion = { version = "0.5.1", features = ["html_reports"] }
+
+[profile.hyper]
+inherits = "release"
+lto = true
+opt-level = 3
+debug = false
+debug-assertions = false
+overflow-checks = false
+panic = "abort"
+codegen-units = 1
